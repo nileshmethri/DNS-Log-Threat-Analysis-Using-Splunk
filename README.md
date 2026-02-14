@@ -88,9 +88,12 @@ Description:
 This query hunts for domains with high-risk or uncommon top-level domains. Such TLDs are frequently associated with phishing and malware infrastructure. It supports threat hunting and IOC-based investigations in SOC workflows.
 ```spl
 index=main sourcetype=_json
-| where like(fqdn,"%.xyz") OR like(fqdn,"%.ru") OR like(fqdn,"%.top")
-```
+| where like(fqdn,"%.xyz") OR like(fqdn,"%.ru") OR like(fqdn,"%.top") OR like(fqdn,"%.fake")
+| stats count by fqdn, src_ip
+| sort -count
 
+```
+Screenshot:![Image Alt](https://github.com/nileshmethri/DNS-Log-Threat-Analysis-Using-Splunk/blob/895a25526a0a286eb46e25c24df7280b02ee262f/dns4.png)
 ### 5.DNS Traffic Trend
 Description:
 This query visualizes DNS query volume over time in 5-minute intervals. It helps analysts detect traffic spikes, beaconing patterns, or unusual activity windows and supports timeline-based incident triage.
