@@ -80,8 +80,9 @@ This query filters failed DNS resolutions (NXDOMAIN responses) and counts them p
 ```spl
 index=main sourcetype=_json response_code=NXDOMAIN
 | stats count by src_ip
+| sort -count
 ```
-
+Screenshot:![Image Alt](https://github.com/nileshmethri/DNS-Log-Threat-Analysis-Using-Splunk/blob/c8e0463ce31545ff66142b3d9018d1bf2a0da29f/dns3.png)
 ### 4.Suspicious Domain Hunt
 Description:
 This query hunts for domains with high-risk or uncommon top-level domains. Such TLDs are frequently associated with phishing and malware infrastructure. It supports threat hunting and IOC-based investigations in SOC workflows.
