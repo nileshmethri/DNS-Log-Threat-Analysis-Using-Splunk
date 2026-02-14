@@ -54,9 +54,9 @@ This project demonstrates DNS log threat analysis using Splunk SPL. The objectiv
 
 ---
 
-## 🔎 Key SPL Queries
+## 🔎 Tasks Performed
 
-### Top Queried Domains
+### 1.Top Queried Domains
 Description:
 This query lists domains by total query count to identify the most frequently requested domains in DNS traffic. It helps establish a baseline of normal domain usage and highlights unusually high-frequency domains that may indicate beaconing or suspicious repeated connections.
 ```spl
@@ -64,31 +64,35 @@ index=main sourcetype=_json
 | stats count by fqdn
 | sort -count
 ```
-
-### High DNS Activity Hosts
-
+Screenshot: ![Image Alt](https://github.com/nileshmethri/DNS-Log-Threat-Analysis-Using-Splunk/blob/af5923aca6d1c11649e3d740bedca83f01edf4d0/dns1.png)
+### 2.High DNS Activity Hosts
+Description:
+This query identifies source IP addresses generating the highest number of DNS requests. It is used to detect potentially compromised or misconfigured systems that produce excessive DNS traffic, which is a common SOC L1 investigation starting point.
 ```spl
 index=main sourcetype=_json
 | stats count by src_ip
 | sort -count
 ```
 
-### NXDOMAIN Detection
-
+### 3.NXDOMAIN Detection
+Description:
+This query filters failed DNS resolutions (NXDOMAIN responses) and counts them per host. A high number of NXDOMAIN results may indicate DGA-based malware, failed command-and-control callbacks, or suspicious automated domain generation behavior.
 ```spl
 index=main sourcetype=_json response_code=NXDOMAIN
 | stats count by src_ip
 ```
 
-### Suspicious Domain Hunt
-
+### 4.Suspicious Domain Hunt
+Description:
+This query hunts for domains with high-risk or uncommon top-level domains. Such TLDs are frequently associated with phishing and malware infrastructure. It supports threat hunting and IOC-based investigations in SOC workflows.
 ```spl
 index=main sourcetype=_json
 | where like(fqdn,"%.xyz") OR like(fqdn,"%.ru") OR like(fqdn,"%.top")
 ```
 
-### DNS Traffic Trend
-
+### 5.DNS Traffic Trend
+Description:
+This query visualizes DNS query volume over time in 5-minute intervals. It helps analysts detect traffic spikes, beaconing patterns, or unusual activity windows and supports timeline-based incident triage.
 ```spl
 index=main sourcetype=_json
 | timechart span=5m count
