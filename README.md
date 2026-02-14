@@ -73,7 +73,7 @@ index=main sourcetype=_json
 | stats count by src_ip
 | sort -count
 ```
-
+Screenshot:![Image Alt](https://github.com/nileshmethri/DNS-Log-Threat-Analysis-Using-Splunk/blob/b60eb67c92352a8d2ae4678b3fffa812b55c6335/dns2.png)
 ### 3.NXDOMAIN Detection
 Description:
 This query filters failed DNS resolutions (NXDOMAIN responses) and counts them per host. A high number of NXDOMAIN results may indicate DGA-based malware, failed command-and-control callbacks, or suspicious automated domain generation behavior.
