@@ -2,7 +2,7 @@
 
 ## 🔍 Project Overview
 
-This project demonstrates DNS log threat analysis using Splunk SPL. The objective is to detect suspicious DNS behavior, phishing domains, and malware-related indicators by analyzing structured DNS log data. The project simulates SOC L1 investigation workflows using statistical and time-based queries.
+This project demonstrates DNS log threat analysis using Splunk SPL. The objective is to detect suspicious DNS behavior, phishing domains, and malware-related indicators by analyzing structured DNS log data. The project simulates SOC Analyst investigation workflows using statistical and time-based queries.
 
 ---
 
@@ -13,7 +13,7 @@ This project demonstrates DNS log threat analysis using Splunk SPL. The objectiv
 * Analyze DNS query behavior
 * Detect suspicious domains and risky TLDs
 * Identify NXDOMAIN spikes and DGA indicators
-* Build SOC L1 investigation queries
+* Build SOC Analyst investigation queries
 
 ---
 
@@ -67,7 +67,7 @@ index=main sourcetype=_json
 Screenshot: ![Image Alt](https://github.com/nileshmethri/DNS-Log-Threat-Analysis-Using-Splunk/blob/af5923aca6d1c11649e3d740bedca83f01edf4d0/dns1.png)
 ### 2.High DNS Activity Hosts
 Description:
-This query identifies source IP addresses generating the highest number of DNS requests. It is used to detect potentially compromised or misconfigured systems that produce excessive DNS traffic, which is a common SOC L1 investigation starting point.
+This query identifies source IP addresses generating the highest number of DNS requests. It is used to detect potentially compromised or misconfigured systems that produce excessive DNS traffic, which is a common SOC Analyst investigation starting point.
 ```spl
 index=main sourcetype=_json
 | stats count by src_ip
@@ -101,31 +101,16 @@ This query visualizes DNS query volume over time in 5-minute intervals. It helps
 index=main sourcetype=_json
 | timechart span=5m count
 ```
+Screenshot:![Image Alt](https://github.com/nileshmethri/DNS-Log-Threat-Analysis-Using-Splunk/blob/60cb13aaa907e38515f595f4a0fd52b35a232eca/dns5.png)
 
----
 
-## 🚨 Detection Use Cases
+## 🚨 ## ✅ Conclusion — DNS Log Threat Analysis Using Splunk
 
-* DGA / malware beaconing detection
-* Phishing domain identification
-* Risky TLD monitoring
-* NXDOMAIN spike analysis
-* Abnormal DNS volume detection
+1.This project demonstrated practical DNS log threat analysis using Splunk and SPL queries aligned with SOC L1 investigation workflows. DNS log data was successfully ingested, parsed, and analyzed to identify abnormal query behavior, suspicious domains, and potential threat indicators.
 
----
+2.Key analysis tasks included identifying top queried domains, detecting high DNS activity hosts, monitoring NXDOMAIN failures, hunting suspicious TLD domains, and visualizing DNS traffic trends over time. These searches helped simulate real-world SOC triage and threat hunting techniques used to detect phishing, malware beaconing, and DGA-like behavior.
 
-## 📊 SOC L1 Skills Demonstrated
+3.Overall, the project strengthened hands-on skills in log ingestion, SPL query development, anomaly detection, and security investigation methodology using Splunk. It reflects practical blue-team capabilities relevant to SOC Analyst roles and real-time security monitoring environments.
 
-* Log ingestion & validation
-* SPL query writing
-* Threat hunting
-* IOC pattern detection
-* Security event triage support
-
----
-
-## ✅ Outcome
-
-Successfully performed DNS threat analysis using Splunk and created SOC L1 detection queries to identify suspicious DNS activity patterns.
 
 ---
